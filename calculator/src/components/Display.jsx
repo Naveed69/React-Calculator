@@ -88,7 +88,9 @@ const Display = () => {
         <div className="top">
           <h1>React Calculator</h1>
           <input type="text" className="display" defaultValue={inputData} />
-          <p className="results" >{result}</p>
+          <br />
+          <div className="results">{result}</div>
+          <br />
         </div>
         <div className="buttons">
           <button type="button" value={"7"} onClick={(e) => addInput(e)}>
