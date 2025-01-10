@@ -1,5 +1,6 @@
 import { useState } from "react";
 import "./css/Display.css";
+import { evaluate } from "mathjs";
 const Display = () => {
   const [inputData, setinputData] = useState("");
   const [result, setResult] = useState(null);
@@ -8,58 +9,69 @@ const Display = () => {
   };
   const handle = () => {
     console.log("sum is calculated", inputData);
-    // setResult(9);
-    let arr = inputData.split("");
-    console.log(arr);
-    let arr1 = [];
-    let i = 0,
-      j = 0,
-      val = 0;
+    try {
+      const evaluateExp = evaluate(inputData);
 
-    while (i <= arr.length) {
-      if (
-        Number(arr[i]) <= 9 &&
-        Number(arr[i]) >= 0 &&
-        arr[j] != "+" &&
-        arr[j] != "-" &&
-        arr[j] != "*" &&
-        arr[j] != "/" &&
-        j != arr.length
-      ) {
-        j++;
-      } else if (
-        i != j &&
-        arr[i] != "+" &&
-        arr[i] != "-" &&
-        arr[i] != "*" &&
-        arr[i] != "/" &&
-        i != arr.length
-      ) {
-        val = val * 10 + Number(arr[i]);
-        i++;
+      if (evaluateExp) {
+        setResult(evaluateExp);
       } else {
-        arr1.push(val);
-        if (arr[j] != null) arr1.push(arr[j]);
-        val = 0;
-        j++;
-        i = j;
+        setResult("Error");
       }
+    } catch (e) {
+      setResult(e);
     }
-    console.log(arr1);
-    arr = [];
-    i = 0;
-    j = 0;
-    let sen = false;
-    //arr1=[1,+,23,-,2,*,8,-,2]
-    while (i < arr1.length) {
-      if (typeof arr1[j] == Number) {
-        j++;
-      } else if (arr1[j] != "+" && arr1[j] != "-") {
-        if (arr1[j] == "*") arr.push(arr1[i] * arr1[j + 1]);
-        j += 2;  
-        i = j;
-      }
-    }
+    // setResult(9);
+    // let arr = inputData.split("");
+    // console.log(arr);
+    // let arr1 = [];
+    // let i = 0,
+    //   j = 0,
+    //   val = 0;
+
+    // while (i <= arr.length) {
+    //   if (
+    //     Number(arr[i]) <= 9 &&
+    //     Number(arr[i]) >= 0 &&
+    //     arr[j] != "+" &&
+    //     arr[j] != "-" &&
+    //     arr[j] != "*" &&
+    //     arr[j] != "/" &&
+    //     j != arr.length
+    //   ) {
+    //     j++;
+    //   } else if (
+    //     i != j &&
+    //     arr[i] != "+" &&
+    //     arr[i] != "-" &&
+    //     arr[i] != "*" &&
+    //     arr[i] != "/" &&
+    //     i != arr.length
+    //   ) {
+    //     val = val * 10 + Number(arr[i]);
+    //     i++;
+    //   } else {
+    //     arr1.push(val);
+    //     if (arr[j] != null) arr1.push(arr[j]);
+    //     val = 0;
+    //     j++;
+    //     i = j;
+    //   }
+    // }
+    // console.log(arr1);
+    // arr = [];
+    // i = 0;
+    // j = 0;
+    // let sen = false;
+    // //arr1=[1,+,23,-,2,*,8,-,2]
+    // while (i < arr1.length) {
+    //   if (typeof arr1[j] == Number) {
+    //     j++;
+    //   } else if (arr1[j] != "+" && arr1[j] != "-") {
+    //     if (arr1[j] == "*") arr.push(arr1[i] * arr1[j + 1]);
+    //     j += 2;
+    //     i = j;
+    //   }
+    // }
   };
   const clearAll = () => {
     setinputData("");
@@ -76,7 +88,7 @@ const Display = () => {
         <div className="top">
           <h1>React Calculator</h1>
           <input type="text" className="display" defaultValue={inputData} />
-          <p className="results">{result}</p>
+          <p className="results" >{result}</p>
         </div>
         <div className="buttons">
           <button type="button" value={"7"} onClick={(e) => addInput(e)}>
