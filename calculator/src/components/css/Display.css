@@ -1,0 +1,28 @@
+.cointainer {
+  height: 500px;
+  width: 400px;
+  border: 1px solid black;
+  border-radius: 10px;
+}
+
+.top {
+  text-align: center;
+}
+
+.buttons {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-gap: 10px;
+  padding-left: 60px;
+  padding-right: 60px;
+  /* display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  flex-wrap: wrap; */
+}
+
+button {
+  height: 60px;
+  width: 60px;
+  border-radius: 5px;
+}
