@@ -11,9 +11,12 @@ const Display = () => {
     console.log("sum is calculated", inputData);
     try {
       const evaluateExp = evaluate(inputData);
-
-      if (evaluateExp) {
-        setResult(evaluateExp);
+      if (inputData) {
+        if (evaluateExp) {
+          setResult(evaluateExp);
+        } else {
+          setResult("NaN");
+        }
       } else {
         setResult("Error");
       }
